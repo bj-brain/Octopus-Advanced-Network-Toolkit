@@ -26,31 +26,58 @@ try {
     $Host.UI.RawUI.WindowTitle = "Octopus Network Toolkit - Enterprise Diagnostics Suite"
 } catch {}
 
-# Color definition: Custom TrueColor ANSI escape map for Hex #60D673 (RGB: 96, 214, 115)
-$OctoColor  = "$([char]27)[38;2;96;214;115m"
-$CyanColor  = "$([char]27)[38;2;0;242;254m"
-$ResetColor = "$([char]27)[0m"
+# Color definition: Custom TrueColor ANSI escape map
+$Esc             = [char]27
+$BackgroundHex   = '#121314'
+$BackgroundColor = "$Esc[48;2;18;19;20m"
+$DefaultBgColor  = "$Esc]11;$BackgroundHex$([char]7)"
+$OctoColor       = "$Esc[38;2;96;214;115m"
+$CyanColor       = "$Esc[38;2;0;242;254m"
+$ResetColor      = "$Esc[0m$BackgroundColor"
+
+function Set-OctopusConsoleBackground {
+    try {
+        $Host.UI.RawUI.BackgroundColor = 'Black'
+    } catch {}
+
+    try {
+        [Console]::Write("$DefaultBgColor$BackgroundColor$Esc[2J$Esc[3J$Esc[H")
+    } catch {
+        try {
+            Clear-Host
+        } catch {}
+    }
+}
 
 # Global Menu Graphic Banner
 $OctopusArt = @'
+                                                                                                                
+                                                                                                                
+                           @@@@@@@@@         /$$$$$$   /$$$$$$  /$$$$$$$$ /$$$$$$  /$$$$$$$  /$$   /$$  /$$$$$$
+                      @@@@@@@@@@@@@@@       /$$__  $$ /$$__  $$|__  $$__//$$__  $$| $$__  $$| $$  | $$ /$$__  $$
+                    @@@@@@@@@@@@@@@@@@@    | $$  \ $$| $$  \__/   | $$  | $$  \ $$| $$  \ $$| $$  | $$| $$  \__/
+                   @@@@@@@@@@@@@@@@@@@@@@  | $$  | $$| $$         | $$  | $$  | $$| $$$$$$$/| $$  | $$|  $$$$$$
+                   @@@@@@@@@@@@@@@@@@@@@@  | $$  | $$| $$         | $$  | $$  | $$| $$____/ | $$  | $$ \____  $$
+          @@@      @@@@@@@@@@@@@@@@@@@@@@  | $$  | $$| $$    $$   | $$  | $$  | $$| $$      | $$  | $$ /$$  \ $$
+         @    @@   @@@@@@@@@@@@@@@@@@@@@@  |  $$$$$$/|  $$$$$$/   | $$  |  $$$$$$/| $$      |  $$$$$$/|  $$$$$$/
+              @@   @@@@@@@@@@@@@@@@@@@@@@   \______/  \______/    |__/   \______/ |__/       \______/  \______/
+             @@@     @@@  @@@@@@@@@  @@@
+            @@@@     @@@    @@@@    @@@      /$$$$$$$$ /$$$$$$   /$$$$$$  /$$       /$$   /$$ /$$$$$$ /$$$$$$$$
+            @@@@       @@@ @@@@@ @@@        |__  $$__//$$__  $$ /$$__  $$| $$      | $$  /$$/|_  $$_/|__  $$__/
+        @      @@     @@@@@@@@@@@@@@@          | $$  | $$  \ $$| $$  \ $$| $$      | $$ /$$/   | $$     | $$
+      @         @@@@@@@@@@@@@@@@@@@@@@@@@@@    | $$  | $$  | $$| $$  | $$| $$      | $$$$$/    | $$     | $$
+      @@@@@@       @@@@@@@@@@@@@@@@@@@@@       | $$  | $$  | $$| $$  | $$| $$      | $$  $$    | $$     | $$
+        @@@@@@@@@@  @@@@@@@@@@@@@@@@@@@        | $$  | $$  | $$| $$  | $$| $$      | $$\  $$   | $$     | $$
+                   @@@  @@@@@   @@@@  @@@      | $$  |  $$$$$$/|  $$$$$$/| $$$$$$$$| $$ \  $$ /$$$$$$   | $$
+                 @@@@  @@@@@@   @@@@@@  @@@@   |__/   \______/  \______/ |________/|__/  \__/|______/   |__/
+          @@@@@@@@@@@  @@@@       @@@@  @@@@@@@@@@
+         @@@            @@@         @@@            @@
+        @@              @@@         @@@              @@    A D V A N C E D   N E T W O R K   T O O L K I T
+        @@@      @@      @@         @@@    @@@      @@@   --------------------------------------------------
+         @@      @       @@         @@@      @@      @@   Baanujan Vijayarajan | https://github.com/bj-brain
+                 @@    @@@@         @@@@  @@@@
+                   @@@@             @@@@
 
-  /$$$$$$   /$$$$$$  /$$$$$$$$ /$$$$$$  /$$$$$$$  /$$   /$$  /$$$$$$ 
- /$$__  $$ /$$__  $$|__  $$__//$$__  $$| $$__  $$| $$  | $$ /$$__  $$
-| $$  \ $$| $$  \__/   | $$  | $$  \ $$| $$  \ $$| $$  | $$| $$  \__/
-| $$  | $$| $$         | $$  | $$  | $$| $$$$$$$/| $$  | $$|  $$$$$$ 
-| $$  | $$| $$         | $$  | $$  | $$| $$____/ | $$  | $$ \____  $$
-| $$  | $$| $$    $$   | $$  | $$  | $$| $$      | $$  | $$ /$$  \ $$
-|  $$$$$$/|  $$$$$$/   | $$  |  $$$$$$/| $$      |  $$$$$$/|  $$$$$$/
- \______/  \______/    |__/   \______/ |__/       \______/  \______/ 
-                                                                                                                             
- /$$$$$$$$ /$$$$$$   /$$$$$$  /$$       /$$   /$$ /$$$$$$ /$$$$$$$$  
-|__  $$__//$$__  $$ /$$__  $$| $$      | $$  /$$/|_  $$_/|__  $$__/  
-   | $$  | $$  \ $$| $$  \ $$| $$      | $$ /$$/   | $$     | $$     
-   | $$  | $$  | $$| $$  | $$| $$      | $$$$$/    | $$     | $$     
-   | $$  | $$  | $$| $$  | $$| $$      | $$  $$    | $$     | $$     
-   | $$  | $$  | $$| $$  | $$| $$      | $$\  $$   | $$     | $$     
-   | $$  |  $$$$$$/|  $$$$$$/| $$$$$$$$| $$ \  $$ /$$$$$$   | $$     
-   |__/   \______/  \______/ |________/|__/  \__/|______/   |__/     
 '@
 
 function Pause-Menu {
@@ -328,13 +355,10 @@ function Read-ValidatedTcpPort {
 
 # Main Application Execution Loop
 while ($true) {
-    Clear-Host
+    Set-OctopusConsoleBackground
     # Print the custom-colored artwork
     Write-Host "$OctoColor$OctopusArt$ResetColor"
-    Write-Host "$CyanColor ================================================================="
-    Write-Host "  O C T O P U S   A D V A N C E D   N E T W O R K   T O O L K I T"
-    Write-Host "  By: Baanujan Vijayarajan | GitHub: https://github.com/bj-brain" -ForegroundColor DarkGray
-    Write-Host " =================================================================" -ForegroundColor Cyan
+    Write-Host "======================================================================================================================" -ForegroundColor Cyan
     echo ""
     Write-Host "--- Core Mechanics: Ephemerality & Stack Resets ---" -ForegroundColor DarkGray
     Write-Host " 1. DHCP Lease Renegotiation & DNS Cache Purge"
@@ -368,7 +392,7 @@ while ($true) {
     Write-Host "19. Smart Local Subnet Scanner & Device Classifier"
     echo ""
     Write-Host "20. Terminate Session"
-    Write-Host "=================================================================" -ForegroundColor Cyan
+    Write-Host "=====================================================================================================================" -ForegroundColor Cyan
     
     $Choice = Read-Host "Execute Subsystem (1-20)"
     

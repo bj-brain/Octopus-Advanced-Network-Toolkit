@@ -1,31 +1,25 @@
 # Octopus Advanced Network Toolkit
 
-                               @@@@@@@@@                                                       
-                          @@@@@@@@@@@@@@@                                                      
-                        @@@@@@@@@@@@@@@@@@@                                                    
-                       @@@@@@@@@@@@@@@@@@@@@@                                                  
-                       @@@@@@@@@@@@@@@@@@@@@@                                                  
-              @@@      @@@@@@@@@@@@@@@@@@@@@@      @@@
-             @    @@   @@@@@@@@@@@@@@@@@@@@@@   @@    @
-                  @@   @@@@@@@@@@@@@@@@@@@@@@   @@     
-                 @@@     @@@  @@@@@@@@@  @@@     @@@   
-                @@@@     @@@    @@@@    @@@     @@@@   
-                @@@@       @@@ @@@@@ @@@       @@@@    
-            @      @@     @@@@@@@@@@@@@@@     @@     @@
-          @         @@@@@@@@@@@@@@@@@@@@@@@@@@@        @ 
-          @@@@@@       @@@@@@@@@@@@@@@@@@@@@      @@@@@@ 
-            @@@@@@@@@@  @@@@@@@@@@@@@@@@@@@  @@@@@@@@@   
-                       @@@  @@@@@   @@@@  @@@          
-                     @@@@  @@@@@@   @@@@@@  @@@@       
-              @@@@@@@@@@@  @@@@       @@@@  @@@@@@@@@@ 
-             @@@            @@@         @@@            @@
-            @@              @@@         @@@              @@
-            @@@      @@      @@         @@@    @@@      @@@
-             @@      @       @@         @@@      @@      @@
-                     @@    @@@@         @@@@  @@@@       
-                       @@@@             @@@@ 
-   
-   
+```text
+  /$$$$$$   /$$$$$$  /$$$$$$$$ /$$$$$$  /$$$$$$$  /$$   /$$  /$$$$$$
+ /$$__  $$ /$$__  $$|__  $$__//$$__  $$| $$__  $$| $$  | $$ /$$__  $$
+| $$  \ $$| $$  \__/   | $$  | $$  \ $$| $$  \ $$| $$  | $$| $$  \__/
+| $$  | $$| $$         | $$  | $$  | $$| $$$$$$$/| $$  | $$|  $$$$$$
+| $$  | $$| $$         | $$  | $$  | $$| $$____/ | $$  | $$ \____  $$
+| $$  | $$| $$    $$   | $$  | $$  | $$| $$      | $$  | $$ /$$  \ $$
+|  $$$$$$/|  $$$$$$/   | $$  |  $$$$$$/| $$      |  $$$$$$/|  $$$$$$/
+ \______/  \______/    |__/   \______/ |__/       \______/  \______/
+
+ /$$$$$$$$ /$$$$$$   /$$$$$$  /$$       /$$   /$$ /$$$$$$ /$$$$$$$$
+|__  $$__//$$__  $$ /$$__  $$| $$      | $$  /$$/|_  $$_/|__  $$__/
+   | $$  | $$  \ $$| $$  \ $$| $$      | $$ /$$/   | $$     | $$
+   | $$  | $$  | $$| $$  | $$| $$      | $$$$$/    | $$     | $$
+   | $$  | $$  | $$| $$  | $$| $$      | $$  $$    | $$     | $$
+   | $$  | $$  | $$| $$  | $$| $$      | $$\  $$   | $$     | $$
+   | $$  |  $$$$$$/|  $$$$$$/| $$$$$$$$| $$ \  $$ /$$$$$$   | $$
+   |__/   \______/  \______/ |________/|__/  \__/|______/   |__/
+```
+
 Octopus is a Windows PowerShell network diagnostics toolkit for local troubleshooting, wireless reporting, adapter checks, packet capture control, and basic subnet discovery.
 
 The script is menu driven and is designed for Windows systems where the built-in networking cmdlets and `netsh` tools are available.
@@ -136,28 +130,28 @@ The temporary Wi-Fi profile export folder is removed after option `17` completes
 
 ## Menu Overview
 
-| Option | Description | Impact |
-| --- | --- | --- |
-| 1 | DHCP lease renegotiation and DNS cache purge | Disruptive |
-| 2 | Winsock and TCP/IP stack reset | Disruptive, reboot usually required |
-| 3 | Wi-Fi interface and RF scan | Read-only |
-| 4 | Restart physical network adapters | Disruptive |
-| 5 | Public WAN metadata lookup | External API |
-| 6 | VPN/tunnel adapter check | Read-only |
-| 7 | Pathping target | Network diagnostic traffic |
-| 8 | ARP table display | Read-only |
-| 9 | Process-to-socket mapping | Read-only, requires admin for process names |
-| 10 | TCP port probe | Network diagnostic traffic |
-| 11 | Start packet capture | Writes ETL file |
-| 12 | Stop Octopus-owned packet capture | Stops only matching Octopus trace |
-| 13 | TCP/IP event log review | Read-only |
-| 14 | Generate WLAN report | Writes Windows WLAN report files |
-| 15 | Local topology simulation | Read-only |
-| 16 | Geolocation lookup | External API |
-| 17 | Extract Wi-Fi profile passwords | Sensitive local credential display |
-| 18 | Proxy/VPN process detection | Read-only |
-| 19 | Smart local subnet scanner | ICMP scan |
-| 20 | Exit | None |
+| Option | Description                                  | Impact                                      |
+| ------ | -------------------------------------------- | ------------------------------------------- |
+| 1      | DHCP lease renegotiation and DNS cache purge | Disruptive                                  |
+| 2      | Winsock and TCP/IP stack reset               | Disruptive, reboot usually required         |
+| 3      | Wi-Fi interface and RF scan                  | Read-only                                   |
+| 4      | Restart physical network adapters            | Disruptive                                  |
+| 5      | Public WAN metadata lookup                   | External API                                |
+| 6      | VPN/tunnel adapter check                     | Read-only                                   |
+| 7      | Pathping target                              | Network diagnostic traffic                  |
+| 8      | ARP table display                            | Read-only                                   |
+| 9      | Process-to-socket mapping                    | Read-only, requires admin for process names |
+| 10     | TCP port probe                               | Network diagnostic traffic                  |
+| 11     | Start packet capture                         | Writes ETL file                             |
+| 12     | Stop Octopus-owned packet capture            | Stops only matching Octopus trace           |
+| 13     | TCP/IP event log review                      | Read-only                                   |
+| 14     | Generate WLAN report                         | Writes Windows WLAN report files            |
+| 15     | Local topology simulation                    | Read-only                                   |
+| 16     | Geolocation lookup                           | External API                                |
+| 17     | Extract Wi-Fi profile passwords              | Sensitive local credential display          |
+| 18     | Proxy/VPN process detection                  | Read-only                                   |
+| 19     | Smart local subnet scanner                   | ICMP scan                                   |
+| 20     | Exit                                         | None                                        |
 
 ## Safety Notes
 
